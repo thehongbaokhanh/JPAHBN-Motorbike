@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>Create and Update form</title>
+</head>
+<body>
+<h3><span th:text="${action}"></span> Motorbike</h3>
+<p>
+    <button>
+        <a th:href="@{/motorbikes}">Back to list</a>
+    </button>
+</p>
+<div id="form">
+    <form th:action="@{/motorbikes/save}" th:object="${motorbike}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}" th:value="*{name}"/></td>
+            </tr>
+            <tr>
+                <td>Sold Number:</td>
+                <td><input type="number" th:field="*{soldNumber}" th:value="*{soldNumber}"/></td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td><input type="text" th:field="*{description}" th:value="*{description}"/></td>
+            </tr>
+        </table>
+        <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

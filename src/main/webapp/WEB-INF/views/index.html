@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>List of motorbikes</title>
+</head>
+<body>
+<h3>List of motorbikes</h3>
+<p>
+    <button>
+        <a th:href="@{/motorbikes/create}">Add new motorbike to list</a>
+    </button>
+</p>
+<table id="motorbikes">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Sold number</th>
+        <th>Description</th>
+        <th colspan="3">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="motorbike, stats : ${motorbikes}">
+        <td th:text="${stats.count}"></td>
+        <td th:text="${motorbike.name}"></td>
+        <td th:text="${motorbike.soldNumber}"></td>
+        <td th:text="${motorbike.description}"></td>
+        <td>
+            <button>
+                <a th:href="@{/motorbikes/edit/{id}(id=${motorbike.id})}">Edit</a>
+            </button>
+            <button>
+                <a th:href="@{/motorbikes/delete/{id}(id=${motorbike.id})}">Delete</a>
+            </button>
+            <button>
+                <a th:href="@{/motorbikes/view/{id}(id=${motorbike.id})}">information</a>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
