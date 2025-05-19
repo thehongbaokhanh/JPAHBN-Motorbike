@@ -26,8 +26,8 @@ public class MotorbikeController {
         return "createAndUpdate";
     }
 
-    @GetMapping("/{id}/update")
-    public String update(Model model,@PathVariable long id) {
+    @GetMapping("/edit/{id}")
+    public String update(Model model, @PathVariable long id) {
         model.addAttribute("motorbike", motorbikeService.findById(id));
         model.addAttribute("action", "Update");
         return "createAndUpdate";
@@ -39,9 +39,10 @@ public class MotorbikeController {
         return "redirect:/motorbikes";
     }
 
-    @GetMapping("/{id}/delete")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id, Model model) {
-        model.addAttribute("motorbike", motorbikeService.findById(id));
+        Motorbike motorbike = motorbikeService.findById(id);
+        model.addAttribute("motorbike", motorbike);
         return "delete";
     }
 
@@ -50,4 +51,27 @@ public class MotorbikeController {
         motorbikeService.delete(motorbike.getId());
         return "redirect:/motorbikes";
     }
+
+    @GetMapping("/information/{id}")
+    public String information(@PathVariable long id, Model model) {
+        model.addAttribute("motorbike", motorbikeService.findById(id));
+        return "information";
+    }
+
+    @PostMapping("/searchByName")
+    public String searchByName(@RequestParam String name, Model model) {
+        if (name != null) {
+            model.addAttribute("motorbikes", motorbikeService.findByName(name));
+            return "index";
+        } else {
+            return "redirect:/motorbikes";
+        }
+    }
+
+    @GetMapping("/bestSeller")
+    public String bestSeller(Model model) {
+        model.addAttribute("motorbikes", motorbikeService.findByBestSelling());
+        return "index";
+    }
+
 }

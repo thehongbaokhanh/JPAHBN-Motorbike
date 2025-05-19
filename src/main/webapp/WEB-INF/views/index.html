@@ -11,6 +11,13 @@
         <a th:href="@{/motorbikes/create}">Add new motorbike to list</a>
     </button>
 </p>
+<form th:action="@{/motorbikes/searchByName}" method="post">
+    <input type="text" name="name" placeholder="Search by name"/>
+    <button type="submit">Search</button>
+</form>
+<form th:action="@{/motorbikes/bestSeller}" method="get">
+    <button type="submit" value="bestSeller">Best seller</button>
+</form>
 <table id="motorbikes">
     <thead>
     <tr>
@@ -35,7 +42,7 @@
                 <a th:href="@{/motorbikes/delete/{id}(id=${motorbike.id})}">Delete</a>
             </button>
             <button>
-                <a th:href="@{/motorbikes/view/{id}(id=${motorbike.id})}">information</a>
+                <a th:href="@{/motorbikes/information/{id}(id=${motorbike.id})}">information</a>
             </button>
         </td>
     </tr>
